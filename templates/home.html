@@ -10,6 +10,35 @@
 
 <br>
 {% endfor %}
-<h1>Hello, world!</h1>
+{% if current_user.is_authenticated %}
 
+<h1>Hello, {{current_user.name}}!</h1>
+{% else %}
+
+<h1>Hello, User!</h1>
+
+{% endif %}
+
+<h3>Latest Posts</h3>
+
+{% for post in posts %}
+<div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+
+<h2>
+    {{post.title}}
+</h2> 
+<small>By : {{post.poster.name}}<br>
+    {{post.date_posted}}
+</small><br>
+<br>
+{{post.content | safe }}<br><br>
+
+
+<a href="{{url_for('view_post',id=post.id)}}" class="btn btn-outline-secondary btn-small">View Post</a>
+{% if post.poster.id == current_user.id %}
+<a href="{{url_for('update_post',id=post.id)}}" class="btn btn-outline-secondary btn-small">Edit Post</a>
+<a href="{{url_for('delete_post',id=post.id)}}" class="btn btn-outline-danger btn-small">Delete Post</a>
+{% endif %}
+</div>
+{% endfor %}
 {% endblock %}

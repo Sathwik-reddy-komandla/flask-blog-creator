@@ -1,0 +1,8 @@
+# Ignore database data files
+/data/*.db
+
+# Ignore environment packages and dependencies
+/myenv/
+/node_modules/
+/venv/
+/env/

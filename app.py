@@ -70,7 +70,11 @@ def logout():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    print("in home***********")
+    posts=Posts.query.order_by(Posts.date_posted).all()
+    print(posts)
+    return render_template('home.html',posts=posts)
+
 
 '''
 Dasboard of the user presents all the posts and allows the user to edit,delete,create posts adn can also view all the posts ever created 
